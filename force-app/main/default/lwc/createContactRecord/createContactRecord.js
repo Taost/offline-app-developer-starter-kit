@@ -1,7 +1,6 @@
 import { LightningElement, api } from "lwc";
 import CONTACT_NAME_FIELD from "@salesforce/schema/Contact.Name";
 import CONTACT_TITLE_FIELD from "@salesforce/schema/Contact.Title";
-import CONTACT_ACCOUNT_FIELD from "@salesforce/schema/Contact.AccountId";
 import CONTACT_PHONE_FIELD from "@salesforce/schema/Contact.Phone";
 import CONTACT_EMAIL_FIELD from "@salesforce/schema/Contact.Email";
 import CONTACT_MOBILE_FIELD from "@salesforce/schema/Contact.MobilePhone";
@@ -13,7 +12,6 @@ export default class CreateContactRecord extends LightningElement {
 
   nameField = CONTACT_NAME_FIELD;
   titleField = CONTACT_TITLE_FIELD;
-  accountField = CONTACT_ACCOUNT_FIELD;
   phoneField = CONTACT_PHONE_FIELD;
   emailField = CONTACT_EMAIL_FIELD;
   mobileField = CONTACT_MOBILE_FIELD;
@@ -25,26 +23,6 @@ export default class CreateContactRecord extends LightningElement {
   phone = "";
   email = "";
   mobile = "";
-
-  selectedId;
-
-  handleChange(event) {
-    // capture the selected accountId from the lookup field
-    this.selectedId = event.detail.recordId;
-    console.log("You selected an account: " + this.selectedId);
-  }
-
-  onSubmit(event) {
-    // stop the form from submitting; add selectedId to the form fields
-    event.preventDefault();
-    const fields = event.detail.fields;
-    if (this.selectedId) {
-      fields[this.accountField.fieldApiName] = this.selectedId;
-    }
-
-    // submit the form with the updated fields
-    this.template.querySelector("lightning-record-edit-form").submit(fields);
-  }
 
   onSuccess(event) {
     console.log("Created a contact", event.detail);
