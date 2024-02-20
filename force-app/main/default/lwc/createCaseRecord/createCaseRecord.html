@@ -1,0 +1,40 @@
+<template>
+    <div class="component-background">
+        <lightning-record-edit-form object-api-name="Case" onsuccess={onSuccess}>
+
+            <div class="header-slot">
+                <!-- cancel and submit buttons-->
+                <lightning-layout horizontal-align="spread" class="slds-var-p-horizontal_xx-small">
+                    <lightning-layout-item>
+                        <lightning-button variant="base" data-id="cancel" label="Cancel" type="button" onclick={dismiss}
+                            class="button"></lightning-button>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item>
+                        <lightning-button variant="base" data-id="submit" label="Create" type="submit"
+                            class="button-primary"></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+
+
+
+            <div class="header-offset slds-var-p-horizontal_small slds-var-p-bottom_medium">
+
+                <!-- show any error messages or alerts -->
+                <lightning-messages></lightning-messages>
+
+                <!-- input fields -->
+                <lightning-input-field field-name={statusField} value={status}></lightning-input-field>
+                <lightning-input-field field-name={originField} value={origin}></lightning-input-field>
+                <lightning-input-field field-name={priorityField} value={priority}></lightning-input-field>
+                <lightning-input-field field-name={typeField} value={type}></lightning-input-field>
+                <lightning-input-field field-name={reasonField} value={reason}></lightning-input-field>
+                <lightning-input-field field-name={subjectField} value={subject}></lightning-input-field>
+                <lightning-input-field field-name={descriptionField} value={description}></lightning-input-field>
+                <lightning-input-field field-name={commentsField} value={comments}></lightning-input-field>
+            </div>
+
+        </lightning-record-edit-form>
+    </div>
+</template>

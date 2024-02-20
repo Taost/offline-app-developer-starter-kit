@@ -5,7 +5,7 @@ import { graphql, gql } from "lightning/uiGraphQLApi";
 
 // eslint-disable-next-line @salesforce/lwc-graph-analyzer/no-unresolved-parent-class-reference
 export default class AccountRelatedContacts extends NavigationMixin(
-  LightningElement,
+  LightningElement
 ) {
   @api recordId;
 
@@ -16,13 +16,15 @@ export default class AccountRelatedContacts extends NavigationMixin(
   */
   get accountQuery() {
     return gql`
-      query accountWithChildContacts($recordId: ID) {
+      query accountWithChildContacts {
         uiapi {
           query {
-            Account(where: { Id: { eq: $recordId } }) {
+            Account(where: { and: [{ EmailInfo__c: { ne: null } }] }) {
               edges {
                 node {
-                  Contacts {
+                  Contacts(
+                    where: { Birthdate: { gte: { value: "2000-01-01" } } }
+                  ) {
                     edges {
                       node {
                         Id

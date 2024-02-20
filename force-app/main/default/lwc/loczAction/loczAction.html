@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-p-around_small">
+        <lightning-card>
+            <c-title slot="title" size="large" icon="standard:account">Localization</c-title>
+            <div if:true={record.data}>
+                <c-fieldrow label="Object Type" value={objectApiName}></c-fieldrow>
+                <c-fieldrow label="Account Id" value={record.data.fields.Id.value}></c-fieldrow>
+                <c-fieldrow label="Account Name" value={record.data.fields.Name.value}></c-fieldrow>
+                <c-fieldrow
+                    if:true={ownerRecord.data}
+                    label="Account Owner"
+                    value={ownerRecord.data.fields.Name.value}
+                ></c-fieldrow>
+                <p>Locale:{loc}     Language:{lang}     Text direction:{dir}</p>
+                <br/>
+                <div>Last Modified Date : {record.data.fields.LastModifiedDate.value}</div>
+                <lightning-formatted-date-time value={record.data.fields.LastModifiedDate.value} time-zone={timezn} time-zone-name="short" year="numeric" month="numeric" day="numeric" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                <br/>
+                <br/>
+                <div if:true={record.data.fields.AnnualRevenue.value}>
+                    <div>Annual Revenue :</div>
+                    <lightning-formatted-number format-style="currency" currency-code={curr} value={record.data.fields.AnnualRevenue.value}></lightning-formatted-number>
+                </div>
+                <br/>
+                <div if:true={record.data.fields.Description.value}>
+                    <div>Description :</div>
+                    <p lang={lang} dir={dir}>{record.data.fields.Description.value}</p>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>

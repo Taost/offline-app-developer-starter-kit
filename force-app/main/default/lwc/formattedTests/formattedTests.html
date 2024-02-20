@@ -1,0 +1,17 @@
+<template>
+    <p>Locale: {loc}</p>
+    <p>Currency: </p>
+    <lightning-formatted-number format-style="currency" value="1234567.56"></lightning-formatted-number>
+    <br/>
+    <p>Date: </p>
+    <lightning-formatted-date-time value={stringVal}></lightning-formatted-date-time>
+    <lightning-input type="date" label="Date Picker"></lightning-input>
+    <br/>
+    <p>Time: </p>
+    <lightning-formatted-time value="13:15"></lightning-formatted-time>
+    <lightning-input type="time" label="Time Picker"></lightning-input>
+    <br/>
+    <p>DateTime: </p>
+    <lightning-formatted-date-time value={stringVal} year="numeric" month="short" day="numeric" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+    <lightning-input type="datetime" label="DateTime Picker"></lightning-input>    
+</template>

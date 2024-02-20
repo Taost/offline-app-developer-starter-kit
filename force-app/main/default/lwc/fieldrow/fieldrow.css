@@ -1,0 +1,16 @@
+.fieldrow {
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    padding: 8px;
+    border-bottom: 1px solid #dddbda;
+    background: white;
+    align-items: center;
+    font-size: 14px;
+    grid-gap: 8px;
+    height: 5rem;
+}
+
+.action-icon {
+    height: 0.75rem;
+    width: 0.75rem;
+}
