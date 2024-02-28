@@ -5,36 +5,29 @@ import { graphql, gql } from "lightning/uiGraphQLApi";
 
 // eslint-disable-next-line @salesforce/lwc-graph-analyzer/no-unresolved-parent-class-reference
 export default class AccountRelatedContacts extends NavigationMixin(
-  LightningElement,
+  LightningElement
 ) {
   @api recordId;
 
-  /*
-    There is a currently Known Issue {@link https://issues.salesforce.com/issue/a028c00000xGGwE/graphql-query-fails-prefetch-with-an-unknown-field-warning} with GraphQL wire adapters where this will cause the component to fail to load offline.   
-    There is a workaround that can be implemented in this Knowledge Article {@link https://help.salesforce.com/s/articleView?language=en_US&id=000396405&type=1}.
-    As of Spring '24 release the issue has been addressed.
-  */
-  get accountQuery() {
-    return gql`
-      query accountWithChildContacts($recordId: ID) {
-        uiapi {
-          query {
-            Account(where: { Id: { eq: $recordId } }) {
-              edges {
-                node {
-                  Contacts {
-                    edges {
-                      node {
-                        Id
-                        Name {
-                          value
-                        }
-                        Phone {
-                          value
-                        }
-                        Email {
-                          value
-                        }
+  accountQuery = gql`
+    query accountWithChildContacts($recordId: ID) {
+      uiapi {
+        query {
+          Account(where: { Id: { eq: $recordId } }) {
+            edges {
+              node {
+                Contacts {
+                  edges {
+                    node {
+                      Id
+                      Name {
+                        value
+                      }
+                      Phone {
+                        value
+                      }
+                      Email {
+                        value
                       }
                     }
                   }
@@ -44,8 +37,8 @@ export default class AccountRelatedContacts extends NavigationMixin(
           }
         }
       }
-    `;
-  }
+    }
+  `;
 
   // https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_graphql_relationships
   //
@@ -57,16 +50,18 @@ export default class AccountRelatedContacts extends NavigationMixin(
   })
   graphqlResult({ data /* errors */ }) {
     this.contacts = null;
-    const accounts = data?.uiapi?.query?.Account?.edges;
-    if (accounts && accounts[0]) {
-      this.contacts = accounts[0].node.Contacts.edges.map((e) => e.node);
+    if (data && data.uiapi.query.Account) {
+      const accounts = data.uiapi.query.Account.edges;
+      if (accounts && accounts[0]) {
+        this.contacts = accounts[0].node.Contacts.edges.map((e) => e.node);
+      }
     }
   }
   contacts;
 
   get graphqlVariables() {
     return {
-      recordId: this.recordId || "",
+      recordId: this.recordId,
     };
   }
 

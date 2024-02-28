@@ -1,5 +1,6 @@
 import { LightningElement, api } from "lwc";
 import { reduceErrors } from "c/ldsUtils";
+import inlineMessage from "./templates/inlineMessage.html";
 
 export default class ErrorPanel extends LightningElement {
   /** Single or array of LDS errors */
@@ -17,5 +18,9 @@ export default class ErrorPanel extends LightningElement {
 
   handleShowDetailsClick() {
     this.viewDetails = !this.viewDetails;
+  }
+
+  render() {
+    return inlineMessage;
   }
 }

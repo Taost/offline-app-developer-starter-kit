@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-p-around_small">
+        <lightning-card>
+            {itemObject.data}
+        </lightning-card>
+        <lightning-card class="slds-theme_shade">
+            <c-title size="medium" icon="standard:apex" slot="title">
+                <span class="slds-text-font_monospace">@wire(apexMethod)</span> Output
+            </c-title>
+            <template if:true={apexResult}>
+                <div if:true={apexResult.data} class="slds-theme_default">
+                    <h3 class="slds-text-heading_medium">Related Contacts from Apex!:</h3>
+                    <template for:each={apexResult.data} for:item="contactName">
+                        <p key={contactName}>{contactName}</p>
+                    </template>
+                </div>
+                <template if:true={apexResult.error}>
+                    Apex Error:
+                    <div class="slds-text-font_monospace">{apexResult.error}</div>
+                </template>
+            </template>
+            <template if:false={apexResult}>No Apex apexResult or Error</template>
+        </lightning-card>
+    </div>
+</template>

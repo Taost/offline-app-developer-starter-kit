@@ -1,0 +1,27 @@
+<template>
+    <div class="fieldrow">
+        <div>{label}</div>
+        <div if:false={isEditing}>
+            <div label="value">{value}</div>
+            <div label="originalValue" if:true={showOriginal}>(was: {originalvalue})</div>
+        </div>
+        <input
+            if:true={isEditing}
+            value={editText}
+            onchange={handleEditTextChange}
+            oninput={handleEditTextChange}
+            class="slds-input"
+        />
+        <lightning-button
+            onclick={handleEditClick}
+            if:true={canEdit}
+            label="Edit"
+        ></lightning-button>
+
+        <lightning-button
+            onclick={handleSaveClick}
+            if:true={isEditing}
+            label="Save"
+        ></lightning-button>
+    </div>
+</template>

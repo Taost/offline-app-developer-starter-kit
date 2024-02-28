@@ -1,0 +1,16 @@
+<template>
+    <lightning-card>
+        <c-title slot="title" size="large" icon="standard:account">Child Relationships</c-title>
+        <template if:true={objectInfo.data}>
+            <template if:true={objectInfo.data.childRelationships}>
+                <template for:each={relationships} for:item="item">
+                    <c-child-relationship-field
+                        key={item.childObjectApiName}
+                        item={item.childObjectApiName}
+                        record-id={recordId}
+                    ></c-child-relationship-field>
+                </template>
+            </template>
+        </template>
+    </lightning-card>
+</template>

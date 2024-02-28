@@ -7,19 +7,21 @@ import CONTACT_ACCOUNT_FIELD from "@salesforce/schema/Contact.AccountId";
 import CONTACT_PHONE_FIELD from "@salesforce/schema/Contact.Phone";
 import CONTACT_EMAIL_FIELD from "@salesforce/schema/Contact.Email";
 import CONTACT_MOBILE_FIELD from "@salesforce/schema/Contact.MobilePhone";
+import CONTACT_OWNER_FIELD from "@salesforce/schema/Contact.OwnerId";
 
 export default class EditContactRecord extends LightningElement {
   @api recordId;
   @api objectApiName;
 
-  nameField = CONTACT_NAME_FIELD;
-  titleField = CONTACT_TITLE_FIELD;
-  accountField = CONTACT_ACCOUNT_FIELD;
-  phoneField = CONTACT_PHONE_FIELD;
-  emailField = CONTACT_EMAIL_FIELD;
-  mobileField = CONTACT_MOBILE_FIELD;
+    nameField = CONTACT_NAME_FIELD;
+    titleField = CONTACT_TITLE_FIELD;
+    accountField = CONTACT_ACCOUNT_FIELD;
+    phoneField = CONTACT_PHONE_FIELD;
+    emailField = CONTACT_EMAIL_FIELD;
+    mobileField = CONTACT_MOBILE_FIELD;
+    ownerField = CONTACT_OWNER_FIELD;
 
-  @wire(getRecord, { recordId: "$recordId", fields: [CONTACT_NAME_FIELD] })
+  @wire(getRecord, { recordId: "$recordId", fields: [NAME_FIELD] })
   record;
 
   get name() {
