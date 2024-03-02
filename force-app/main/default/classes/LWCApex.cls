@@ -17,7 +17,8 @@ public with sharing class LWCApex {
 
     @AuraEnabled(cacheable=true)
     public static String komaciApexMethod(String recordId) {
-        return 'Hi from Apex! ' + recordId;
+        Contact result = [Select AccountId from Contact where Id =: recordId Limit 1];
+        return result.AccountId;
     }
 
     @AuraEnabled(cacheable=true)
