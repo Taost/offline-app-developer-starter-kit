@@ -1,0 +1,23 @@
+<template>
+    <div class="container">
+        <div if:true={selectedContentDocuments} class="attachments-container">
+            <template for:each={selectedContentDocuments} for:item="record">
+                <div key={record.node.ContentDocument.Id}>
+                    <lightning-card
+                        title={record.node.ContentDocument.Title.value}
+                        icon-name="doctype:image"
+                    >
+                        <div class="card-body">
+                            <p>Description: {record.node.ContentDocument.Description.value}</p>
+                            <img
+                                class={imagePreviewClass}
+                                src={record.node.ContentDocument.LatestPublishedVersion.VersionDataUrl.value}
+                                alt={record.node.ContentDocument.Description.value}
+                            />
+                        </div>
+                    </lightning-card>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
