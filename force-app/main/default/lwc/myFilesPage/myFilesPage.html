@@ -1,0 +1,69 @@
+<template>
+    <div class="container">
+        <h1>File Upload</h1>
+
+        <div>
+            <lightning-input
+                type="file"
+                name="fileUploader"
+                label="Pick file to upload"
+                multiple="true"
+                accept="*/*"
+                onchange={handleInputChange}
+            >
+            </lightning-input>
+        </div>
+        <div if:true={fileName}>
+            <p>Selected file:</p>
+            <p>{fileName}</p>
+            <div class="inputs">
+                <lightning-input
+                    type="text"
+                    label="Title"
+                    value={titleValue}
+                    onchange={handleTitleInputChange}
+                ></lightning-input>
+                <lightning-input
+                    type="text"
+                    label="Description"
+                    value={descriptionValue}
+                    onchange={handleDescriptionInputChange}
+                ></lightning-input>
+            </div>
+            <button
+                class="slds-button slds-button_brand slds-var-m-top_medium"
+                disabled={uploadingFile}
+                onclick={handleUploadClick}
+            >
+                Upload
+            </button>
+        </div>
+
+        <div if:true={errorMessage}>
+            <lightning-card title="Error">
+                <div class="card-body">{errorMessage}</div>
+            </lightning-card>
+        </div>
+        <hr />
+
+        <div if:true={selectedContentDocuments} class="attachments-container">
+            <template for:each={selectedContentDocuments} for:item="record">
+                <div key={record.node.ContentDocument.Id}>
+                    <lightning-card
+                        title={record.node.ContentDocument.Title.value}
+                        icon-name="doctype:image"
+                    >
+                        <div class="card-body">
+                            <p>Description: {record.node.ContentDocument.Description.value}</p>
+                            <img
+                                class={imagePreviewClass}
+                                src={record.node.ContentDocument.LatestPublishedVersion.VersionDataUrl.value}
+                                alt={record.node.ContentDocument.Description.value}
+                            />
+                        </div>
+                    </lightning-card>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
