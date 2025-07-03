@@ -46,6 +46,18 @@
         </div>
         <hr />
 
+
+        <div if:true={uploadedFile}>
+            <h2>Uploaded File</h2>
+            <img
+                class={imagePreviewClass}
+                src={uploadedFile}
+            />
+            <hr />
+        </div>
+        
+
+        <h2>Record Attached Files</h2>
         <div if:true={selectedContentDocuments} class="attachments-container">
             <template for:each={selectedContentDocuments} for:item="record">
                 <div key={record.node.ContentDocument.Id}>
